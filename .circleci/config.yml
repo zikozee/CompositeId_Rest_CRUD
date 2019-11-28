@@ -30,13 +30,16 @@ jobs:
       - checkout
 
       - run:
-          name: Wait for MSSQL
-          command: >
-            for i in `seq 1 10`;do
-              echo "Waiting for mssql"
-#              sqlcmd -H localhost -U sa -P administrator##@ -Q "SELECT * FROM [composite_crud].[dbo].[employee];" > /dev/null > /dev/null && c=0 && break || c=$? && sleep 1
-            done;
-            exit $c
+          # Our primary container isn't MYSSQL so run a sleep command until it's ready.
+          name: Waiting for MSSQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 1433 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySSQL && exit 1
 
       # Download and cache dependencies
       - restore_cache:
