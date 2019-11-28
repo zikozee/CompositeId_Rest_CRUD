@@ -13,7 +13,7 @@ jobs:
             ACCEPT_EULA: Y
             SA_PASSWORD: Administrator2##@
             MSSQL_DB: composite_crud
-            MSSQL_USER: atmuser
+            MSSQL_USER: sa
             MSSQL_PASSWORD: Administrator2##@
 
 
