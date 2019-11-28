@@ -10,8 +10,8 @@ jobs:
       - image: circleci/openjdk:8-jdk
       - image: microsoft/mssql-server-linux:2017-GDR
         environment:
-          ACCEPT_EULA: 'Y'
-          SA_PASSWORD: 'Administrator2##@'
+          ACCEPT_EULA: Y
+          SA_PASSWORD: Administrator2##@
 
 
 
