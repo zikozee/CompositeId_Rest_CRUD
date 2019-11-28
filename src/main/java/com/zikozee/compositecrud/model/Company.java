@@ -3,10 +3,7 @@ package com.zikozee.compositecrud.model;
 import com.zikozee.compositecrud.model.compositeModel.CompanyIdentity;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "company")
@@ -15,7 +12,7 @@ import javax.persistence.Table;
 public class Company {
 
     @Id
-    private int registrationId;
+    private int registrationId;  // difficult to do post and update
 
     @Id
     private int regionId;

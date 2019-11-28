@@ -1,5 +1,6 @@
 package com.zikozee.compositecrud.controller;
 
+import com.zikozee.compositecrud.globalHandling.EntityNotFoundException;
 import com.zikozee.compositecrud.model.Company;
 import com.zikozee.compositecrud.model.compositeModel.CompanyIdentity;
 import com.zikozee.compositecrud.service.CompanyService;
@@ -17,12 +18,12 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @GetMapping("/companies")
+    @GetMapping("/comp")
     public Set<Company> getCompanies() {
         return companyService.findAll();
     }
 
-    @GetMapping("/companies/{registrationId}/{regionId}")
+    @GetMapping("/comp/{registrationId}/{regionId}")
     public Company getCompanyById(@PathVariable int registrationId, @PathVariable int regionId) {
 
         CompanyIdentity identity = new CompanyIdentity(registrationId, regionId);
@@ -36,7 +37,7 @@ public class CompanyController {
         return company;
     }
 
-    @GetMapping("/companies/registration/{registrationId}")
+    @GetMapping("/comp/registration/{registrationId}")
     public List<Company> getCompanyByRegistrationId(@PathVariable int registrationId) {
 
         List<Company> companies = companyService.findByRegistrationId(registrationId);
@@ -48,7 +49,7 @@ public class CompanyController {
         return companies;
     }
 
-    @GetMapping("/companies/region/{regionId}")
+    @GetMapping("/comp/region/{regionId}")
     public List<Company> getCompanyByRegionId(@PathVariable int regionId) {
         List<Company> companies = companyService.findByRegionId(regionId);
 
@@ -59,21 +60,27 @@ public class CompanyController {
         return companies;
     }
 
-    @PostMapping("/companies")
+    @PostMapping("/comp")
     public Company createCompany(@RequestBody Company company) {
+        CompanyIdentity identity = new CompanyIdentity(company.getRegistrationId(), company.getRegionId());
+        Company existingCompany = companyService.findById(identity);
+
+        if(existingCompany != null){
+            throw new EntityNotFoundException("Employee already exist");
+        }
         companyService.saveCompany(company);
 
         return company;
     }
 
-    @PutMapping("/companies")
+    @PutMapping("/comp")
     public Company updateCompany(@RequestBody Company company) {
         companyService.saveCompany(company);
 
         return company;
     }
 
-    @DeleteMapping("/companies/{registrationId}/{regionId}")
+    @DeleteMapping("/comp/{registrationId}/{regionId}")
     public Company deleteCompany(@PathVariable int registrationId, @PathVariable int regionId){
 
         CompanyIdentity identity = new CompanyIdentity(registrationId, regionId);

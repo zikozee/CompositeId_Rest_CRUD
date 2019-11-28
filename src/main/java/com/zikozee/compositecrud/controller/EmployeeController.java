@@ -1,15 +1,15 @@
 package com.zikozee.compositecrud.controller;
 
+import com.zikozee.compositecrud.globalHandling.EntityNotFoundException;
 import com.zikozee.compositecrud.model.Employee;
 import com.zikozee.compositecrud.model.compositeModel.EmployeeIdentity;
 import com.zikozee.compositecrud.service.EmployeeService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
 
-@Controller
+@RestController
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -63,6 +63,12 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public Employee createCompany(@RequestBody Employee employee) {
+
+        Employee existingEmployee = employeeService.findById(employee.getEmployeeIdentity());
+
+        if(existingEmployee != null){
+            throw new EntityNotFoundException("Employee already exist");
+        }
         employeeService.saveEmployee(employee);
 
         return employee;

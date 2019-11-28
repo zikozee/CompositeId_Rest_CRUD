@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Employee {
 
     @EmbeddedId
-    private EmployeeIdentity employeeIdentity;
+    private EmployeeIdentity employeeIdentity; // with this post and update can be done easily
 
     private String name;
 
