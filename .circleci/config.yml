@@ -12,6 +12,9 @@ jobs:
         environment:
           ACCEPT_EULA: Y
           SA_PASSWORD: Administrator2##@
+          MSSQL_DATABASE: composite_crud
+          MSSQL_USER: atmuser
+          MSSQL_PASSWORD: Administrator2##@
 
 
 
