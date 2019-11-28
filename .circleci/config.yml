@@ -11,7 +11,7 @@ jobs:
       - image: microsoft/mssql-server-linux:2017-GDR
         environment:
           ACCEPT_EULA: 'Y'
-          SA_PASSWORD: 'administrator##@'
+          SA_PASSWORD: 'Administrator2##@'
 
 
 
