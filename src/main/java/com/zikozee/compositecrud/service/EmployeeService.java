@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     Employee deleteById(EmployeeIdentity employeeIdentity);
 
-    Employee saveEmployee(Employee employee);
+    void saveEmployee(Employee employee);
 
     List<Employee> findByEmployeeId(String employeeId);
 
